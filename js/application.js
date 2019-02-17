@@ -6,13 +6,14 @@ document.addEventListener("DOMContentLoaded", function (e) {
 let a = document.getElementById("answer");
 let c = document.getElementById("operators-container");
 let q = document.getElementById("question");
-const startButton = document.getElementById("start");
-const restartButton = document.getElementById("restart");
-const hideTimer = document.getElementById("hide_timer");
 let $limitRangeSlider = $('#number-limit-range');
 let over_img = document.getElementById("game-over-img");
 let limitCounter = document.getElementById("number-limit")
 let numberLimit = document.getElementById('number-limit-range').value;
+const startButton = document.getElementById("start");
+const restartButton = document.getElementById("restart");
+const hideTimer = document.getElementById("hide_timer");
+const hide_game_option = document.getElementById("hide_game_option");
 const message = document.getElementById("message");
 
 ////////// state variable  //////////////
@@ -46,6 +47,10 @@ const startTimer = () => {
     document.getElementById('timer').innerHTML = timer;
     if (timer <= 0) {
       clearInterval(intervalID);
+      restartButton.classList.remove('hidden');
+      a.classList.add("hidden");
+      message.innerHTML = "";
+      over_img.classList.remove("hidden");
       gameOver();
     }
   }, 1500);
@@ -57,6 +62,7 @@ const startNewGame = () => {
   a.classList.remove("hidden");
   hideTimer.classList.remove("hidden");
   startButton.classList.add("hidden");
+  hide_game_option.classList.add("hidden");
   const operations = selectedOperations();
   let n1 = Math.floor((Math.random() * numberLimit) + 1);
   let n2 = Math.floor((Math.random() * numberLimit) + 1);
@@ -106,10 +112,6 @@ const startNewGame = () => {
 const gameOver = () => {
   q.innerHTML = `Your Score: ${score} <br> <span class="correct">C</span>/<span class="wrong">W</span>:
                 <span class="correct">${correctAnswerCount}</span>/<span class="wrong">${wrongAnswerCount}<span>`;
-  restartButton.classList.remove('hidden');
-  a.classList.add("hidden");
-  message.innerHTML = "";
-  over_img.classList.remove("hidden");
 }
 
 const selectedOperations = () => {
@@ -148,5 +150,4 @@ const increaseLimitRangeSlider = () => {
   if (numberLimit > 100) {
     numberLimit = 100;
   }
-  // console.log(numberLimit);
 }
