@@ -49,7 +49,7 @@ const startTimer = () => {
       clearInterval(intervalID);
       restartButton.classList.remove('hidden');
       a.classList.add("hidden");
-      message.innerHTML = "";
+      message.classList.add("hidden");
       over_img.classList.remove("hidden");
       gameOver();
     }
